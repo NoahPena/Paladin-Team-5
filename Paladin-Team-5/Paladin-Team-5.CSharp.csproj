@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Activatable\Activatable.cs" />
     <Compile Include="Assets\Scripts\Activatable\Chest.cs" />
     <Compile Include="Assets\Scripts\Activatable\Lever.cs" />
+    <Compile Include="Assets\Scripts\Camera_Controller.cs" />
     <Compile Include="Assets\Scripts\Equipment.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
