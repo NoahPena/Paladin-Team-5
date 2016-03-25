@@ -32,17 +32,20 @@ public class Player : MonoBehaviour
 		this.equipment = this.GetComponent<Equipment>();
 	}
 
+	void Update()
+	{
+		if(Input.GetKeyDown("i") == true)
+		{
+			this.inventory.toggle_Inventory();
+		}
+		if(Input.GetKeyDown("u") == true)
+		{
+			this.equipment.toggle_Equipment();
+		}
+	}
+
 	void FixedUpdate()
 	{
-		if(Input.GetKey("1") == true && this.inventory.items.Count > 0)
-		{
-			this.equipment.equip_Item(this.inventory.items[0]);
-		}
-		if(Input.GetKey("2") == true)
-		{
-			this.equipment.unequip_Item(this.equipment.cloak);
-		}
-
 		if(Input.GetKey("e") == true)
 		{
 			this.current_Action = Player.Actions.Activate;

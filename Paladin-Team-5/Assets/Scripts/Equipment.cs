@@ -5,89 +5,114 @@ public class Equipment : MonoBehaviour
 	private Player player;
 	private Inventory inventory;
 
+	public Transform equipment_Canvas;
+
 	public Item cloak;
+	public UnityEngine.UI.Button cloak_Equipment_Button;
 	public Item boots;
+	public UnityEngine.UI.Button boots_Equipment_Button;
 	public Item leggings;
+	public UnityEngine.UI.Button leggings_Equipment_Button;
 	public Item gloves;
+	public UnityEngine.UI.Button gloves_Equipment_Button;
 	public Item hat;
+	public UnityEngine.UI.Button hat_Equipment_Button;
 	public Item bracelets;
+	public UnityEngine.UI.Button bracelets_Equipment_Button;
 	public Item amulet;
+	public UnityEngine.UI.Button amulet_Equipment_Button;
 	public Item rings;
+	public UnityEngine.UI.Button rings_Equipment_Button;
 	public Item shirt;
+	public UnityEngine.UI.Button shirt_Equipment_Button;
 	public Item earrings;
+	public UnityEngine.UI.Button earrings_Equipment_Button;
 
 	public void Start()
 	{
+		this.equipment_Canvas.gameObject.SetActive(false);
 		this.player = this.gameObject.GetComponent<Player>();
 		this.inventory = this.gameObject.GetComponent<Inventory>();
 	}
 
-	public void unequip_Item(Item item_To_Unequip)
+	public void unequip_Item(int item_Type_Integer_Value)
 	{
-		if(item_To_Unequip != null && this.inventory != null && this.inventory.is_Full() == false)
+		Item.Types slot_To_Unequip = (Item.Types)item_Type_Integer_Value;
+		if(this.inventory != null && this.inventory.is_Full() == false)
 		{
-			this.player.maximum_Stamina = this.player.maximum_Stamina - item_To_Unequip.stamina_Increase;
-			this.player.stamina_Regeneration = this.player.stamina_Regeneration - item_To_Unequip.stamina_Regneration_Increase;
-			this.player.health_Regeneration = this.player.health_Regeneration - item_To_Unequip.health_Regeneration_Increase;
-			this.player.mana_Regeneration = this.player.mana_Regeneration - item_To_Unequip.mana_Regeneration_Increase;
-			switch(item_To_Unequip.item_Type)
+			Item item_To_Unequip = null;
+			switch(slot_To_Unequip)
 			{
 				case Item.Types.Cloak:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.cloak;
 					this.cloak = null;
 					break;
 
 				case Item.Types.Boots:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.boots;
 					this.boots = null;
 					break;
 
 				case Item.Types.Leggings:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.leggings;
 					this.leggings = null;
 					break;
 
 				case Item.Types.Gloves:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.gloves;
 					this.gloves = null;
 					break;
 
 				case Item.Types.Hat:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.hat;
 					this.hat = null;
 					break;
 
 				case Item.Types.Bracelets:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.bracelets;
 					this.bracelets = null;
 					break;
 
 				case Item.Types.Amulet:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.amulet;
 					this.amulet = null;
 					break;
 
 				case Item.Types.Rings:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.rings;
 					this.rings = null;
 					break;
 
 				case Item.Types.Shirt:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.shirt;
 					this.shirt = null;
 					break;
 
 				case Item.Types.Earrings:
-					this.inventory.add_Item(item_To_Unequip);
+					item_To_Unequip = this.earrings;
 					this.earrings = null;
 					break;
+			}
+			if(item_To_Unequip != null)
+			{
+				this.player.maximum_Stamina = this.player.maximum_Stamina - item_To_Unequip.stamina_Increase;
+				this.player.stamina_Regeneration = this.player.stamina_Regeneration - item_To_Unequip.stamina_Regneration_Increase;
+				this.player.health_Regeneration = this.player.health_Regeneration - item_To_Unequip.health_Regeneration_Increase;
+				this.player.mana_Regeneration = this.player.mana_Regeneration - item_To_Unequip.mana_Regeneration_Increase;
+				this.inventory.add_Item(item_To_Unequip);
 			}
 		}
 	}
 
-	public void equip_Item(Item item_To_Equip)
+	public void equip_Item(int index_Of_Item_To_Equip)
 	{
-		if(item_To_Equip != null && this.inventory != null)
+		Item item_To_Equip = null;
+		if(index_Of_Item_To_Equip >= 0 && index_Of_Item_To_Equip < this.inventory.items.Count)
+		{
+			item_To_Equip = this.inventory.items[index_Of_Item_To_Equip];
+		}
+		Debug.Log(item_To_Equip);
+		if(item_To_Equip != null)
 		{
 			Item currently_Equipped_Item = null;
 			switch(item_To_Equip.item_Type)
@@ -156,5 +181,10 @@ public class Equipment : MonoBehaviour
 			this.player.health_Regeneration = this.player.health_Regeneration + item_To_Equip.health_Regeneration_Increase;
 			this.player.mana_Regeneration = this.player.mana_Regeneration + item_To_Equip.mana_Regeneration_Increase;
 		}
+	}
+
+	public void toggle_Equipment()
+	{
+		this.equipment_Canvas.gameObject.SetActive(!this.equipment_Canvas.gameObject.activeSelf);
 	}
 }
