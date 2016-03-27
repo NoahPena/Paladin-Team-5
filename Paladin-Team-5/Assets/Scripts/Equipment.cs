@@ -185,6 +185,7 @@ public class Equipment : MonoBehaviour
 
 	public void toggle_Equipment()
 	{
+		this.equipment_Canvas.transform.SetAsFirstSibling();
 		this.equipment_Canvas.gameObject.SetActive(!this.equipment_Canvas.gameObject.activeSelf);
 	}
 }
