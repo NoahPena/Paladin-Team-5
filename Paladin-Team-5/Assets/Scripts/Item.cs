@@ -4,6 +4,7 @@ public class Item : MonoBehaviour
 {
 	public enum Types
 	{
+		Weapon,
 		Cloak,
 		Boots,
 		Leggings,
