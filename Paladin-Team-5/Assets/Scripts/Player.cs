@@ -36,11 +36,26 @@ public class Player : MonoBehaviour
 	{
 		if(Input.GetKeyDown("i") == true)
 		{
-			this.inventory.toggle_Inventory();
+			this.inventory.toggle_Interface();
 		}
-		if(Input.GetKeyDown("u") == true)
+		if(Input.GetKeyDown("p") == true)
 		{
-			this.equipment.toggle_Equipment();
+			this.equipment.toggle_Interface();
+		}
+		if(Input.GetKeyDown("escape") == true)
+		{
+			if(this.equipment.interface_Canvas.activeSelf == false && this.inventory.interface_Canvas.activeSelf == false)// || this.menu.interface_Canvas.activeSelf == true)
+			{
+				Debug.Log("Toggle Menu Interface");
+			}
+			else if(this.equipment.interface_Canvas.activeSelf == true)
+			{
+				this.equipment.toggle_Interface();
+			}
+			if(this.inventory.interface_Canvas.activeSelf == true)
+			{
+				this.inventory.toggle_Interface();
+			}
 		}
 	}
 

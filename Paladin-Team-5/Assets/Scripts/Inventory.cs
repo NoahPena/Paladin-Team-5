@@ -1,35 +1,38 @@
 ﻿using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Interface_Window
 {
 	private Equipment equipment;
 
 	private System.Collections.Generic.List<GameObject> inventory_Interface;
 	private GameObject inventory_Item;
-	private RectTransform window_Transform;
-	private float window_Half_Width = 232.5f;	//I can't seem to access the RectTransform's stored width and height parameters, so these are used instead
-	private float window_Half_Height = 225.0f;
-	private bool drag_Window = false;
-	private float previous_Update_Mouse_X_Position;
-	private float previous_Update_Mouse_Y_Position;
 
-	public GameObject inventory_Canvas;
+//	private RectTransform window_Transform;
+//	private float window_Half_Width = 232.5f;	//I can't seem to access the RectTransform's stored width and height parameters, so these are used instead
+//	private float window_Half_Height = 225.0f;
+//	private bool drag_Window = false;
+//	private float previous_Update_Mouse_X_Position;
+//	private float previous_Update_Mouse_Y_Position;
+
+//	public GameObject inventory_Canvas;
+
 	public System.Collections.Generic.List<Item> items;
 	public int maximum_Number_Of_Items;
 
 
 	public void Start()
 	{
-		this.inventory_Canvas.SetActive(false);	//Fix for weird Canvas rendering issues- ensure the canvas is active in the scene
+		this.initialize_Interface_Window();
+//		this.inventory_Canvas.SetActive(false);	//Fix for weird Canvas rendering issues- ensure the canvas is active in the scene
 		this.equipment = this.gameObject.GetComponent<Equipment>();
 		this.inventory_Interface = new System.Collections.Generic.List<GameObject>();
 		this.inventory_Item = Resources.Load<GameObject>("Inventory Item");
-		this.window_Transform = this.inventory_Canvas.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
+//		this.window_Transform = this.inventory_Canvas.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
 	}
 
-	public void Update()
+	/*public void Update()
 	{
-		if(this.drag_Window == true)
+		if(this.drag_Window == true && this.inventory_Canvas.transform.parent.GetChild(0) == this.inventory_Canvas.transform)
 		{
 			this.window_Transform.anchoredPosition = new Vector2(this.window_Transform.anchoredPosition.x + (Input.mousePosition.x - this.previous_Update_Mouse_X_Position), this.window_Transform.anchoredPosition.y + (Input.mousePosition.y - this.previous_Update_Mouse_Y_Position));
 		}
@@ -54,7 +57,7 @@ public class Inventory : MonoBehaviour
 		}
 		this.previous_Update_Mouse_X_Position = Input.mousePosition.x;
 		this.previous_Update_Mouse_Y_Position = Input.mousePosition.y;
-	}
+	}*/
 
 	public void add_Item(Item item_To_Add)
 	{
@@ -95,9 +98,13 @@ public class Inventory : MonoBehaviour
 		return this.items.Count >= this.maximum_Number_Of_Items;
 	}
 
-	public void toggle_Inventory()
+/*	public void toggle_Inventory()
 	{
-		this.inventory_Canvas.transform.SetAsFirstSibling();
+		if(this.inventory_Canvas.activeSelf == false)
+		{
+			this.inventory_Canvas.transform.SetAsFirstSibling();
+		}
 		this.inventory_Canvas.SetActive(!this.inventory_Canvas.activeSelf);
-	}
+		this.drag_Window = false;
+	}*/
 }

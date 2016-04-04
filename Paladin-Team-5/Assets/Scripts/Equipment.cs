@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 
-public class Equipment : MonoBehaviour
+public class Equipment : Interface_Window
 {
 	private Player player;
 	private Inventory inventory;
 
-	public Transform equipment_Canvas;
+//	private RectTransform window_Transform;
+//	private float window_Half_Width = 140.0f;	//I can't seem to access the RectTransform's stored width and height parameters, so these are used instead
+//	private float window_Half_Height = 225.0f;
+//	private bool drag_Window = false;
+//	private float previous_Update_Mouse_X_Position;
+//	private float previous_Update_Mouse_Y_Position;
+
+//	public GameObject equipment_Canvas;
 
 	public Item cloak;
 	public UnityEngine.UI.Button cloak_Equipment_Button;
@@ -30,10 +37,41 @@ public class Equipment : MonoBehaviour
 
 	public void Start()
 	{
-		this.equipment_Canvas.gameObject.SetActive(false);
+		this.initialize_Interface_Window();
+//		this.window_Half_Width = 140.0f;
+//		this.window_Half_Height = 225.0f;
 		this.player = this.gameObject.GetComponent<Player>();
 		this.inventory = this.gameObject.GetComponent<Inventory>();
 	}
+
+/*	public void Update()
+	{
+		if(this.drag_Window == true && this.equipment_Canvas.transform.parent.GetChild(0) == this.equipment_Canvas.transform)
+		{
+			this.window_Transform.anchoredPosition = new Vector2(this.window_Transform.anchoredPosition.x + (Input.mousePosition.x - this.previous_Update_Mouse_X_Position), this.window_Transform.anchoredPosition.y + (Input.mousePosition.y - this.previous_Update_Mouse_Y_Position));
+		}
+		if(Input.GetMouseButtonDown(0))
+		{
+			//If the click is within the current window's rectangle...
+			if(this.equipment_Canvas.activeSelf == true && Input.mousePosition.x >= this.window_Transform.position.x - this.window_Half_Width && Input.mousePosition.x <= this.window_Transform.position.x + this.window_Half_Width && Input.mousePosition.y >= this.window_Transform.position.y - this.window_Half_Height && Input.mousePosition.y <= this.window_Transform.position.y + this.window_Half_Height)
+			{
+				this.equipment_Canvas.transform.SetAsFirstSibling();
+				this.equipment_Canvas.SetActive(false);					//Fix for weird Canvas rendering issues
+				this.equipment_Canvas.SetActive(true);
+				this.drag_Window = true;
+			}
+//			else if()//Add dragging window when menu bar clicked and held instead of the entire box
+//			{
+
+//			}
+		}
+		if(Input.GetMouseButtonUp(0))
+		{
+			this.drag_Window = false;
+		}
+		this.previous_Update_Mouse_X_Position = Input.mousePosition.x;
+		this.previous_Update_Mouse_Y_Position = Input.mousePosition.y;
+	}*/
 
 	public void unequip_Item(int item_Type_Integer_Value)
 	{
@@ -183,9 +221,12 @@ public class Equipment : MonoBehaviour
 		}
 	}
 
-	public void toggle_Equipment()
+/*	public void toggle_Equipment()
 	{
-		this.equipment_Canvas.transform.SetAsFirstSibling();
+		if(this.equipment_Canvas.activeSelf == false)
+		{
+			this.equipment_Canvas.transform.SetAsFirstSibling();
+		}
 		this.equipment_Canvas.gameObject.SetActive(!this.equipment_Canvas.gameObject.activeSelf);
-	}
+	}*/
 }
