@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
 	}
 
 	public Item.Types item_Type;
+	public float cost;
 	public float stamina_Increase;
 	public float stamina_Regneration_Increase;
 	public float health_Regeneration_Increase;

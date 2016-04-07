@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour 
+public class Weapon : Item
 {
 
 	public enum WeaponType
@@ -11,15 +11,16 @@ public class Weapon : MonoBehaviour
 		BOW_AND_ARROW,
 		SHIELD
 	}
+		
 
 
-	[System.NonSerialized]
+	//[System.NonSerialized]
 	public float Damage;
 
-	[System.NonSerialized]
+	//[System.NonSerialized]
 	public float Block;
 
-	[System.NonSerialized]
-	public float Cost;
+	//[System.NonSerialized]
+	//public float Cost;
 
 }
