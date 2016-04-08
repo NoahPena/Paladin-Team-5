@@ -149,7 +149,7 @@ public class Equipment : Interface_Window
 		{
 			item_To_Equip = this.inventory.items[index_Of_Item_To_Equip];
 		}
-		Debug.Log(item_To_Equip);
+//		Debug.Log(item_To_Equip);
 		if(item_To_Equip != null)
 		{
 			Item currently_Equipped_Item = null;

@@ -67,7 +67,7 @@ public class Inventory : Interface_Window
 			this.inventory_Interface.Add((GameObject)Object.Instantiate(this.inventory_Item));
 			this.inventory_Interface[this.inventory_Interface.Count - 1].transform.SetParent(this.window_Transform);
 			this.inventory_Interface[this.inventory_Interface.Count - 1].transform.localPosition = new Vector3(-110.0f + (220.0f * ((this.inventory_Interface.Count - 1) / 15)), 100.0f - ((this.inventory_Interface.Count - 1)% 15) * 20.0f, 0.0f);
-			this.inventory_Interface[this.inventory_Interface.Count - 1].GetComponentInChildren<UnityEngine.UI.Text>().text = "Item " + this.items.Count + ": " + item_To_Add.item_Type;
+			this.inventory_Interface[this.inventory_Interface.Count - 1].GetComponentInChildren<UnityEngine.UI.Text>().text = "Item " + this.items.Count + ": " + item_To_Add.item_Name;
 			this.inventory_Interface[this.inventory_Interface.Count - 1].GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
 			int inventory_Index = this.items.Count - 1;
 			this.inventory_Interface[this.inventory_Interface.Count - 1].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => this.equipment.equip_Item(inventory_Index));
@@ -85,7 +85,7 @@ public class Inventory : Interface_Window
 			for(int i = 0; i < this.inventory_Interface.Count && i < this.items.Count; i++)
 			{
 				this.inventory_Interface[i].transform.localPosition = new Vector3(-110.0f + (220.0f * (i / 15)), 100.0f - (i % 15) * 20.0f, 0.0f);
-				this.inventory_Interface[i].GetComponentInChildren<UnityEngine.UI.Text>().text = "Item " + (i + 1) + ": " + this.items[i].item_Type;
+				this.inventory_Interface[i].GetComponentInChildren<UnityEngine.UI.Text>().text = "Item " + (i + 1) + ": " + this.items[i].item_Name;
 				this.inventory_Interface[i].GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
 				int inventory_Index = i;
 				this.inventory_Interface[i].GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => this.equipment.equip_Item(inventory_Index));

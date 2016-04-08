@@ -10,7 +10,7 @@ public class Chest : Activatable
 		{
 			this.activated = true;
 			player.GetComponent<Player>().inventory.add_Item(this.contained_Treasure);
-			Debug.Log(this.contained_Treasure.item_Type + " added to inventory.");
+//			Debug.Log(this.contained_Treasure.item_Type + " added to inventory.");
 			contained_Treasure = null;
 		}
 		else if(this.activated == false)
