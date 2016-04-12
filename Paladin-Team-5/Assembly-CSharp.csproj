@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Two_Handed_Sword.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\overlord\scripts\OverlordControl.cs" />
+     <Compile Include="Assets\overlord\scripts\Sword.cs" />
      <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
      <None Include="Assets\Elven_Sword\ReadMe.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

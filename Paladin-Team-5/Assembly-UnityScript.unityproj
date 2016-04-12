@@ -48,8 +48,6 @@
      <Compile Include="Assets\overlord\scripts\basichealth.js" />
      <Compile Include="Assets\overlord\scripts\cameraRoot.js" />
      <Compile Include="Assets\overlord\scripts\footsounds.js" />
-     <Compile Include="Assets\overlord\scripts\overlordcontrol.js" />
-     <Compile Include="Assets\overlord\scripts\sword.js" />
      <Compile Include="Assets\overlord\scripts\wait&amp;destroy.js" />
      <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
      <None Include="Assets\Elven_Sword\ReadMe.txt" />

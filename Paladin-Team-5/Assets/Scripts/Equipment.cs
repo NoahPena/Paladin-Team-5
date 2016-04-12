@@ -14,6 +14,8 @@ public class Equipment : Interface_Window
 
 //	public GameObject equipment_Canvas;
 
+	public Weapon weapon;
+	public UnityEngine.UI.Button weapon_Equipment_Button;
 	public Item cloak;
 	public UnityEngine.UI.Button cloak_Equipment_Button;
 	public Item boots;
@@ -130,6 +132,13 @@ public class Equipment : Interface_Window
 					item_To_Unequip = this.earrings;
 					this.earrings = null;
 					break;
+
+			case Item.Types.Weapon:
+				item_To_Unequip = this.weapon;
+				this.weapon = null;
+				GameObject.Find ("sword").SetActive (true);
+				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = GameObject.Find ("sword").transform;
+				break;
 			}
 			if(item_To_Unequip != null)
 			{
@@ -203,6 +212,14 @@ public class Equipment : Interface_Window
 				case Item.Types.Earrings:
 					currently_Equipped_Item = this.earrings;
 					this.earrings = item_To_Equip;
+					break;
+
+			case Item.Types.Weapon:
+				currently_Equipped_Item = this.weapon;
+				this.weapon = (Weapon)item_To_Equip;
+				GameObject.Find ("sword").SetActive (false);
+				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = this.weapon.gameObject.transform;
+
 					break;
 			}
 			inventory.delete_Item(item_To_Equip);
