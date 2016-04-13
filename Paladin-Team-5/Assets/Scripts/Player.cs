@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	public Inventory inventory;
 	[HideInInspector]
 	public Equipment equipment;
+	private Options_Menu menu;
 
 	public enum Actions
 	{
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
 	{
 		this.inventory = this.GetComponent<Inventory>();
 		this.equipment = this.GetComponent<Equipment>();
+		this.menu = this.GetComponent<Options_Menu>();
 	}
 
 	void Update()
@@ -44,9 +46,9 @@ public class Player : MonoBehaviour
 		}
 		if(Input.GetKeyDown("escape") == true)
 		{
-			if(this.equipment.interface_Canvas.activeSelf == false && this.inventory.interface_Canvas.activeSelf == false)// || this.menu.interface_Canvas.activeSelf == true)
+			if((this.equipment.interface_Canvas.activeSelf == false && this.inventory.interface_Canvas.activeSelf == false) || this.menu.interface_Canvas.activeSelf == true)
 			{
-				Debug.Log("Toggle Menu Interface");
+				this.menu.toggle_Interface();
 			}
 			else if(this.equipment.interface_Canvas.activeSelf == true)
 			{
