@@ -36,11 +36,11 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetKeyDown("i") == true)
+		if(Input.GetKeyDown("i") == true && this.menu.interface_Canvas.activeSelf == false)
 		{
 			this.inventory.toggle_Interface();
 		}
-		if(Input.GetKeyDown("p") == true)
+		if(Input.GetKeyDown("p") == true && this.menu.interface_Canvas.activeSelf == false)
 		{
 			this.equipment.toggle_Interface();
 		}
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 			{
 				this.menu.toggle_Interface();
 			}
-			else if(this.equipment.interface_Canvas.activeSelf == true)
+			if(this.equipment.interface_Canvas.activeSelf == true)
 			{
 				this.equipment.toggle_Interface();
 			}

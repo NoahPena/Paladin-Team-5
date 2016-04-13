@@ -58,7 +58,7 @@ public abstract class Interface_Window : MonoBehaviour
 		this.previous_Update_Mouse_Y_Position = Input.mousePosition.y;
 	}
 
-	public void toggle_Interface()
+	public virtual void toggle_Interface()
 	{
 		if(this.interface_Canvas.activeSelf == false)
 		{
