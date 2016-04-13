@@ -122,7 +122,7 @@ public class OverlordControl : MonoBehaviour
 			targetVelocity *= speed;
 		}
 
-		Sword swordscript = weapon.GetComponent<Sword> ();
+		Sword swordscript = weapon.GetComponentInChildren<Sword> ();
 
 		if (canAttack) 
 		{

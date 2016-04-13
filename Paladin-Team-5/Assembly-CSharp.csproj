@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Main_Menu_Actions.cs" />
      <Compile Include="Assets\Scripts\One_Handed_Sword.cs" />
+     <Compile Include="Assets\Scripts\Options_Menu.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Two_Handed_Sword.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />

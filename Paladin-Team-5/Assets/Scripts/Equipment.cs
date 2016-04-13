@@ -136,7 +136,8 @@ public class Equipment : Interface_Window
 			case Item.Types.Weapon:
 				item_To_Unequip = this.weapon;
 				this.weapon = null;
-				GameObject.Find ("sword").SetActive (true);
+				GameObject.Find ("sword").GetComponent<MeshRenderer> ().enabled = true;
+				GameObject.Find ("ElvenSword").GetComponentInChildren<MeshRenderer> ().enabled = false;
 				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = GameObject.Find ("sword").transform;
 				break;
 			}
@@ -217,8 +218,9 @@ public class Equipment : Interface_Window
 			case Item.Types.Weapon:
 				currently_Equipped_Item = this.weapon;
 				this.weapon = (Weapon)item_To_Equip;
-				GameObject.Find ("sword").SetActive (false);
-				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = this.weapon.gameObject.transform;
+				GameObject.Find ("sword").GetComponent<MeshRenderer> ().enabled = false;
+				GameObject.Find ("ElvenSword").GetComponentInChildren<MeshRenderer> ().enabled = true;
+				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = GameObject.Find("ElvenSword").transform;
 
 					break;
 			}
