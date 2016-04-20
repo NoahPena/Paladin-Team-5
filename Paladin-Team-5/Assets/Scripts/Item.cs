@@ -15,6 +15,7 @@ public class Item : MonoBehaviour
 		Shirt = 8,
 		Earrings = 9,
 		Weapon = 10,
+		Shield = 11
 	}
 
 	public Item.Types item_Type;

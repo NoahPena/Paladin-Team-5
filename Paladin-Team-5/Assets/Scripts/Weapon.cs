@@ -13,6 +13,9 @@ public class Weapon : Item
 	}
 		
 
+	public int ID;
+
+	public WeaponType weaponType;
 
 	//[System.NonSerialized]
 	public float Damage;

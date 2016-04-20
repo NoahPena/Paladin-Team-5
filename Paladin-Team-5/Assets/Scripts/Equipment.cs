@@ -218,6 +218,7 @@ public class Equipment : Interface_Window
 			case Item.Types.Weapon:
 				currently_Equipped_Item = this.weapon;
 				this.weapon = (Weapon)item_To_Equip;
+				Debug.Log (this.weapon.ID);
 				GameObject.Find ("sword").GetComponent<MeshRenderer> ().enabled = false;
 				GameObject.Find ("ElvenSword").GetComponentInChildren<MeshRenderer> ().enabled = true;
 				GameObject.Find ("overlord").GetComponent<OverlordControl> ().weapon = GameObject.Find("ElvenSword").transform;
@@ -238,6 +239,11 @@ public class Equipment : Interface_Window
 			this.player.health_Regeneration = this.player.health_Regeneration + item_To_Equip.health_Regeneration_Increase;
 			this.player.mana_Regeneration = this.player.mana_Regeneration + item_To_Equip.mana_Regeneration_Increase;
 		}
+	}
+
+	public void EquipWeapons(Weapon weapon)
+	{
+		
 	}
 
 /*	public void toggle_Equipment()
