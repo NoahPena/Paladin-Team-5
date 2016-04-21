@@ -2,6 +2,8 @@
 
 public class Player : MonoBehaviour
 {
+	public static GameObject player_Game_Object;
+
 	public float damage;
 	public float maximum_Health;
 	public float current_Health;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 
 	void Start()
 	{
+		Player.player_Game_Object = this.gameObject;
 		this.inventory = this.GetComponent<Inventory>();
 		this.equipment = this.GetComponent<Equipment>();
 		this.menu = this.GetComponent<Options_Menu>();
