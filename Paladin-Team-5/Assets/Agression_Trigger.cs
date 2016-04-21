@@ -4,16 +4,29 @@ public class Agression_Trigger : MonoBehaviour
 {
 	public float amount_Of_Time_To_Cease_Aggression = 10.0f;
 	public System.Collections.Generic.List<Vector3> patrol_Locations;
-	public float movement_Speed;
+	public float aggression_Speed;
+	public float attack_Range;
 
 	private Vector3 current_Patrol_Location;
 	private int current_Patrol_Location_Index = 0;
 	private float time_To_End_Aggression = float.MinValue;
 	private Animator enemy_Animator;
 
+	private NavMeshAgent navigator;
+	private float patrol_Speed;
+	private float patrol_Stopping_Distance;
+
+	private Enemy enemy_Script;
+
 	void Start()
 	{
 		this.enemy_Animator = this.GetComponentInParent<Animator>();
+
+		this.navigator = this.GetComponentInParent<NavMeshAgent>();
+		this.patrol_Speed = this.navigator.speed;
+
+		this.enemy_Script = this.GetComponentInParent<Enemy>();
+
 		if(this.patrol_Locations.Count > 0)
 		{
 			this.current_Patrol_Location = this.patrol_Locations[0];
@@ -23,35 +36,49 @@ public class Agression_Trigger : MonoBehaviour
 			this.patrol_Locations.Add(this.transform.position);
 			this.current_Patrol_Location = this.patrol_Locations[0];
 		}
+		this.navigator.SetDestination(this.current_Patrol_Location);
 	}
 
 	void FixedUpdate()
 	{
 		if(this.time_To_End_Aggression >= Time.fixedTime)
 		{
-			if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking") == false)
+//			if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking") == false)
+			if(this.enemy_Script.state != Enemy.enemy_State.Attacking)
 			{
-				if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running Repeater") == false)
+				if(this.navigator.remainingDistance <= this.attack_Range + 0.01f)
+				{
+					if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Repeater") == false)
+					{
+						this.enemy_Animator.Play("Idle");
+					}
+					this.transform.parent.eulerAngles = new Vector3(0.0f, Mathf.Atan2((Player.player_Game_Object.transform.position - this.transform.parent.position).x, (Player.player_Game_Object.transform.position - this.transform.parent.position).z) * Mathf.Rad2Deg, 0.0f);
+				}
+				else if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running Repeater") == false)
 				{
 					this.enemy_Animator.Play("Running");
 				}
-				this.transform.parent.Translate((Player.player_Game_Object.transform.position - this.transform.parent.position).normalized * this.movement_Speed * 1.75f, Space.World);
-				this.transform.parent.eulerAngles = new Vector3(0.0f, Mathf.Atan2((Player.player_Game_Object.transform.position - this.transform.parent.position).x, (Player.player_Game_Object.transform.position - this.transform.parent.position).z) * Mathf.Rad2Deg, 0.0f);
+				if(this.navigator.destination != Player.player_Game_Object.transform.position)
+				{
+					this.navigator.SetDestination(Player.player_Game_Object.transform.position);
+				}
+				
 			}
 		}
 		else
 		{
+			if(this.navigator.obstacleAvoidanceType != ObstacleAvoidanceType.NoObstacleAvoidance)
+			{
+				this.navigator.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+				this.navigator.speed = this.patrol_Speed;
+				this.navigator.stoppingDistance = this.patrol_Stopping_Distance;
+			}
 			if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking Repeater") == false)
 			{
 				this.enemy_Animator.Play("Walking");
 			}
-			this.transform.parent.Translate((this.current_Patrol_Location - this.transform.parent.position).normalized * this.movement_Speed, Space.World);
-			this.transform.parent.eulerAngles = new Vector3(0.0f, Mathf.Atan2((this.current_Patrol_Location - this.transform.parent.position).x, (this.current_Patrol_Location - this.transform.parent.position).z) * Mathf.Rad2Deg, 0.0f);
-//			Debug.Log("Current Patrol Location: " + this.current_Patrol_Location);
-//			Debug.Log("Current parent position: " + this.transform.parent.position);
-			if((this.current_Patrol_Location - this.transform.parent.position).magnitude <= this.movement_Speed * 1.05f)
+			if(this.navigator.remainingDistance < this.patrol_Stopping_Distance + 0.01f)
 			{
-				this.transform.parent.position = this.current_Patrol_Location;
 				if(this.current_Patrol_Location_Index + 1 < this.patrol_Locations.Count)
 				{
 					this.current_Patrol_Location_Index = this.current_Patrol_Location_Index + 1;
@@ -63,6 +90,10 @@ public class Agression_Trigger : MonoBehaviour
 					this.current_Patrol_Location = this.patrol_Locations[this.current_Patrol_Location_Index];
 				}
 			}
+			if(this.navigator.destination != this.current_Patrol_Location)
+			{
+				this.navigator.SetDestination(this.current_Patrol_Location);
+			}
 		}
 	}
 
@@ -70,7 +101,9 @@ public class Agression_Trigger : MonoBehaviour
 	{
 		if(other.gameObject.tag == "Player")
 		{
-//			Debug.Log("Beginning agression");
+			this.navigator.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+			this.navigator.speed = this.aggression_Speed;
+			this.navigator.stoppingDistance = this.attack_Range;
 			this.time_To_End_Aggression = float.MaxValue;
 		}
 	}
@@ -79,7 +112,6 @@ public class Agression_Trigger : MonoBehaviour
 	{
 		if(other.gameObject.tag == "Player")
 		{
-//			Debug.Log("Ending agression at " + Time.fixedTime + this.amount_Of_Time_To_Cease_Aggression);
 			this.time_To_End_Aggression = Time.fixedTime + this.amount_Of_Time_To_Cease_Aggression;
 		}
 	}
