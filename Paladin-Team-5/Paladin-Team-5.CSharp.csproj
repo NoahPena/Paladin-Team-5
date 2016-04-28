@@ -98,6 +98,7 @@
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\ghoul\shader\ghoulshader.shader" />
     <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
     <None Include="Assets\overlord\readme.txt" />
   </ItemGroup>
