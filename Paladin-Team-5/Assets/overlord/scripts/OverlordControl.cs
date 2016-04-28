@@ -129,19 +129,35 @@ public class OverlordControl : MonoBehaviour
 			bool attackState = animator.GetCurrentAnimatorStateInfo (0).IsName ("attacks");
 			swordscript.canAttack = attackState;
 
-			if (Input.GetButtonDown ("Fire1")) 
-			{
+			if (Input.GetButtonDown ("Fire1")) {
 				if (!attackState) {
 					myAudioSource.clip = wooshSounds [Random.Range (0, wooshSounds.Length)];
 					myAudioSource.pitch = 0.98f + 0.1f * Random.value;
 					myAudioSource.Play ();
 
 					animator.SetBool ("attack", true);
+
+					gameObject.GetComponent<Player> ().damage = 10;
+					weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
 				}
+			} else if (Input.GetKey ("1")) {
+				Debug.Log ("Block");
+				Debug.Log (animator.GetCurrentAnimatorStateInfo (0).ToString ());
+				animator.PlayInFixedTime ("Block");
+				gameObject.GetComponent<Player> ().blocked = true;
+				//animator.SetInteger ("Ability", 1);
+			} else if (Input.GetKey ("3")) {
+				Debug.Log ("Staggering Blow");
+				animator.PlayInFixedTime ("SpinAttack");
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+				gameObject.GetComponent<Player> ().damage = 15;
 			}
 			else
 			{
 				animator.SetBool ("attack", false);	
+				gameObject.GetComponent<Player> ().blocked = false;
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
+				gameObject.GetComponent<Player> ().damage = 0;
 			}
 		}
 
@@ -153,9 +169,30 @@ public class OverlordControl : MonoBehaviour
 				moveDirection.y = jumpHeight;
 				animator.SetBool ("Jump", true);
 				isJumping = true;
-			} else {
+			} 
+			else if (Input.GetKey ("2") && canAttack && Time.time > nextJump) {
+				Debug.Log ("Heavenly Strike");
+
+				nextJump = Time.time + jumpInterval;
+				moveDirection.y = jumpHeight * 1.2f;
+				isJumping = true;
+
+				animator.PlayInFixedTime ("HeavenlyStrike");
+
+				gameObject.GetComponent<Player> ().damage = 25;
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+
+			}
+			else if(Input.GetKey("n"))
+			{
+				animator.PlayInFixedTime ("Catwalk");
+			}
+			else
+			{
 				animator.SetBool ("Jump", false);
 				isJumping = false;
+				gameObject.GetComponent<Player> ().damage = 0;
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
 			}
 		}
 		else

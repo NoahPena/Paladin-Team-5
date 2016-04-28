@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 	public float current_Mana;
 	public float mana_Regeneration;
 
+	public bool blocked = false;
+
 	[HideInInspector]
 	public Inventory inventory;
 	[HideInInspector]

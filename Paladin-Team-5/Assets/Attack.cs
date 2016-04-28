@@ -47,8 +47,14 @@ public class Attack : MonoBehaviour
 					if(other.tag == "Player")
 					{
 						this.has_Hit = true;
-						other.GetComponent<Player>().current_Health = other.GetComponent<Player>().current_Health - this.damage;
+						float mitigation = (float)(this.damage * .05);
+						other.GetComponent<Player>().current_Health = other.GetComponent<Player>().current_Health - ((other.GetComponent<Player>().blocked) ? mitigation : this.damage);
 						Debug.Log("The Enemy has hit the Player for " + this.damage + " damage.");
+						
+						if (other.GetComponent<Player> ().blocked) 
+						{
+							Debug.Log ("Blocked!");
+						}
 					}
 					break;
 
