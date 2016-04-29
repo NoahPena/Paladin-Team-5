@@ -135,10 +135,11 @@ public class OverlordControl : MonoBehaviour
 					myAudioSource.pitch = 0.98f + 0.1f * Random.value;
 					myAudioSource.Play ();
 
-					animator.SetBool ("attack", true);
+					
 
 					gameObject.GetComponent<Player> ().damage = 10;
 					weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+					animator.SetBool ("attack", true);
 				}
 			} else if (Input.GetKey ("1")) {
 				Debug.Log ("Block");
