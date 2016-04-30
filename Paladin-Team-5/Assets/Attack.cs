@@ -67,4 +67,17 @@ public class Attack : MonoBehaviour
 			}
 		}
 	}
+
+	void begin_Attack()
+	{
+		this.has_Hit = false;
+		if(this.owner.tag == "Player")
+		{
+			this.damage = this.owner.GetComponentInChildren<Player>().damage;
+		}
+		else if(this.owner.tag == "Enemy")
+		{
+			this.damage = this.owner.GetComponentInChildren<Enemy>().damage;
+		}
+	}
 }
