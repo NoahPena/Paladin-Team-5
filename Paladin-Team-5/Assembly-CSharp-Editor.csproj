@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+     <None Include="Assets\ghoul\shader\ghoulshader.shader" />
      <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
      <None Include="Assets\Elven_Sword\ReadMe.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

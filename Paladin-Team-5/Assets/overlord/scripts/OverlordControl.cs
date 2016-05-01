@@ -124,21 +124,44 @@ public class OverlordControl : MonoBehaviour
 
 		Sword swordscript = weapon.GetComponentInChildren<Sword> ();
 
+	//	int attackIdleState = Animator.StringToHash ("Base.attackstance 1");
+	//	Debug.Log (attackIdleState);
+
+		AnimatorStateInfo currentBaseState = animator.GetCurrentAnimatorStateInfo (0);
+
+
+
 		if (canAttack) 
 		{
+			if (currentBaseState.shortNameHash == -1806479147) {
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
+				gameObject.GetComponent<Player> ().damage = 0;
+			} else {
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+			}
+
 			bool attackState = animator.GetCurrentAnimatorStateInfo (0).IsName ("attacks");
 			swordscript.canAttack = attackState;
 
-			if (Input.GetButtonDown ("Fire1")) {
-				if (!attackState) {
+
+
+			if (Input.GetButtonDown ("Fire1")) 
+			{
+				//weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+
+				if (!attackState) 
+				{
+					weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+					gameObject.GetComponent<Player> ().damage = 10;
+
 					myAudioSource.clip = wooshSounds [Random.Range (0, wooshSounds.Length)];
 					myAudioSource.pitch = 0.98f + 0.1f * Random.value;
 					myAudioSource.Play ();
 
 					
 
-					gameObject.GetComponent<Player> ().damage = 10;
-					weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+
+					//weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
 					animator.SetBool ("attack", true);
 				}
 			} else if (Input.GetKey ("1")) {
@@ -149,16 +172,15 @@ public class OverlordControl : MonoBehaviour
 				//animator.SetInteger ("Ability", 1);
 			} else if (Input.GetKey ("3")) {
 				Debug.Log ("Staggering Blow");
-				animator.PlayInFixedTime ("SpinAttack");
 				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
 				gameObject.GetComponent<Player> ().damage = 15;
-			}
-			else
-			{
+				animator.PlayInFixedTime ("SpinAttack");
+
+			} else {
 				animator.SetBool ("attack", false);	
 				gameObject.GetComponent<Player> ().blocked = false;
-				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
-				gameObject.GetComponent<Player> ().damage = 0;
+				//weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
+				//gameObject.GetComponent<Player> ().damage = 0;
 			}
 		}
 
@@ -174,14 +196,16 @@ public class OverlordControl : MonoBehaviour
 			else if (Input.GetKey ("2") && canAttack && Time.time > nextJump) {
 				Debug.Log ("Heavenly Strike");
 
+				gameObject.GetComponent<Player> ().damage = 25;
+				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+
 				nextJump = Time.time + jumpInterval;
 				moveDirection.y = jumpHeight * 1.2f;
 				isJumping = true;
 
 				animator.PlayInFixedTime ("HeavenlyStrike");
 
-				gameObject.GetComponent<Player> ().damage = 25;
-				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+
 
 			}
 			else if(Input.GetKey("n"))
@@ -192,8 +216,8 @@ public class OverlordControl : MonoBehaviour
 			{
 				animator.SetBool ("Jump", false);
 				isJumping = false;
-				gameObject.GetComponent<Player> ().damage = 0;
-				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
+				//gameObject.GetComponent<Player> ().damage = 0;
+				//weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
 			}
 		}
 		else

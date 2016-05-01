@@ -39,6 +39,9 @@ public class Attack : MonoBehaviour
 				case "Player":
 					if(other.tag == "Enemy")
 					{
+					this.has_Hit = true;
+
+					other.GetComponent<Enemy> ().current_Health = this.damage;
 						Debug.Log("The Player has hit the Enemy.");
 					}
 					break;

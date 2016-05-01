@@ -87,6 +87,7 @@
      <Compile Include="Assets\Standard Assets\Utility\TimedObjectDestructor.cs" />
      <Compile Include="Assets\Standard Assets\Utility\WaypointCircuit.cs" />
      <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
+     <None Include="Assets\ghoul\shader\ghoulshader.shader" />
      <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
      <None Include="Assets\Elven_Sword\ReadMe.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
