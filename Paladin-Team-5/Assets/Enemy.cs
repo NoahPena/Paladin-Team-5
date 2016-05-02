@@ -61,4 +61,16 @@ public class Enemy : MonoBehaviour
 		this.state = Enemy.enemy_State.Idle;
 		this.attack_Box.SetActive(false);
 	}
+
+	public void die()
+	{
+		this.state = Enemy.enemy_State.Dying;
+		this.enemy_Animator.Play("Dying");
+		this.GetComponent<NavMeshAgent>().baseOffset = 0.0f;
+		this.time_Of_Next_Attack_Available = float.MaxValue;
+		this.CancelInvoke();
+		this.attack_Box.SetActive(false);
+		Audio_Manager.clips.Invoke("play_Passive_Clip", 5.0f);
+		Object.Destroy(this.gameObject, 5.0f);
+	}
 }

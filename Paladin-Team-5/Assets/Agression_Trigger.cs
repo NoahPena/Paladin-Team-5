@@ -55,56 +55,66 @@ public class Agression_Trigger : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if(this.time_To_End_Aggression >= Time.fixedTime)
+		if(this.enemy_Script.state != Enemy.enemy_State.Dying)
 		{
-			if(this.enemy_Script.state != Enemy.enemy_State.Attacking)
+			if(this.time_To_End_Aggression >= Time.fixedTime)
 			{
-				if(this.navigator.remainingDistance <= this.attack_Range + 0.01f)
+				Audio_Manager.clips.CancelInvoke();
+				if(Audio_Manager.audio_Source.clip != Audio_Manager.clips.combat_Clip)
+				{
+					Audio_Manager.audio_Source.clip = Audio_Manager.clips.combat_Clip;
+					Audio_Manager.audio_Source.Play();
+				}
+				if(this.enemy_Script.state != Enemy.enemy_State.Attacking)
+				{
+					if(this.navigator.remainingDistance <= this.attack_Range + 0.01f)
+					{
+						if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Repeater") == false)
+						{
+							this.enemy_Animator.Play("Idle");
+						}
+						this.transform.parent.eulerAngles = new Vector3(0.0f, Mathf.Atan2((Player.player_Game_Object.transform.position - this.transform.parent.position).x, (Player.player_Game_Object.transform.position - this.transform.parent.position).z) * Mathf.Rad2Deg, 0.0f);
+					}
+					else if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running Repeater") == false)
+					{
+						this.enemy_Animator.Play("Running");
+					}
+					if(this.navigator.destination != Player.player_Game_Object.transform.position)
+					{
+						this.navigator.SetDestination(Player.player_Game_Object.transform.position);
+					}
+				
+				}
+			}
+			else
+			{
+				if(this.navigator.obstacleAvoidanceType != ObstacleAvoidanceType.NoObstacleAvoidance)
+				{
+					Audio_Manager.clips.Invoke("play_Passive_Clip", 5.0f);
+					this.navigator.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+					this.navigator.speed = this.patrol_Speed;
+					this.navigator.stoppingDistance = this.patrol_Stopping_Distance;
+				}
+				if(this.navigator.remainingDistance < this.patrol_Stopping_Distance + 0.01f)
 				{
 					if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Repeater") == false)
 					{
 						this.enemy_Animator.Play("Idle");
 					}
-					this.transform.parent.eulerAngles = new Vector3(0.0f, Mathf.Atan2((Player.player_Game_Object.transform.position - this.transform.parent.position).x, (Player.player_Game_Object.transform.position - this.transform.parent.position).z) * Mathf.Rad2Deg, 0.0f);
+					if(this.enemy_Script.state != Enemy.enemy_State.Idle)
+					{
+						this.enemy_Script.state = Enemy.enemy_State.Idle;
+						this.Invoke("set_Next_Patrol_Location", this.patrol_Wait_Time);
+					}
 				}
-				else if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Running Repeater") == false)
+				else if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking Repeater") == false)
 				{
-					this.enemy_Animator.Play("Running");
+					this.enemy_Animator.Play("Walking");
 				}
-				if(this.navigator.destination != Player.player_Game_Object.transform.position)
+				if(this.navigator.destination != this.current_Patrol_Location && this.time_To_Begin_Patrol < Time.fixedTime)
 				{
-					this.navigator.SetDestination(Player.player_Game_Object.transform.position);
+					this.navigator.SetDestination(this.current_Patrol_Location);
 				}
-				
-			}
-		}
-		else
-		{
-			if(this.navigator.obstacleAvoidanceType != ObstacleAvoidanceType.NoObstacleAvoidance)
-			{
-				this.navigator.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-				this.navigator.speed = this.patrol_Speed;
-				this.navigator.stoppingDistance = this.patrol_Stopping_Distance;
-			}
-			if(this.navigator.remainingDistance < this.patrol_Stopping_Distance + 0.01f)
-			{
-				if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle Repeater") == false)
-				{
-					this.enemy_Animator.Play("Idle");
-				}
-				if(this.enemy_Script.state != Enemy.enemy_State.Idle)
-				{
-					this.enemy_Script.state = Enemy.enemy_State.Idle;
-					this.Invoke("set_Next_Patrol_Location", this.patrol_Wait_Time);
-				}
-			}
-			else if(this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking") == false && this.enemy_Animator.GetCurrentAnimatorStateInfo(0).IsName("Walking Repeater") == false)
-			{
-				this.enemy_Animator.Play("Walking");
-			}
-			if(this.navigator.destination != this.current_Patrol_Location && this.time_To_Begin_Patrol < Time.fixedTime)
-			{
-				this.navigator.SetDestination(this.current_Patrol_Location);
 			}
 		}
 	}

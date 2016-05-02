@@ -22,6 +22,7 @@ public class Attack : MonoBehaviour
 		this.has_Hit = false;
 		if(this.owner.tag == "Player")
 		{
+			Debug.Log("Attacking");
 			this.damage = this.owner.GetComponentInChildren<Player>().damage;
 		}
 		else if(this.owner.tag == "Enemy")
@@ -39,10 +40,15 @@ public class Attack : MonoBehaviour
 				case "Player":
 					if(other.tag == "Enemy")
 					{
-					this.has_Hit = true;
+						this.has_Hit = true;
 
-					other.GetComponent<Enemy> ().current_Health = this.damage;
-						Debug.Log("The Player has hit the Enemy.");
+						Enemy enemy_Hit = other.GetComponent<Enemy>();
+						enemy_Hit.current_Health = enemy_Hit.current_Health - this.damage;
+						Debug.Log("The Player has hit the Enemy for " + this.damage + ".");
+						if(enemy_Hit.current_Health <= 0)
+						{
+							enemy_Hit.die();
+						}
 					}
 					break;
 

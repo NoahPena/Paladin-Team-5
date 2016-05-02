@@ -134,10 +134,9 @@ public class OverlordControl : MonoBehaviour
 		if (canAttack) 
 		{
 			if (currentBaseState.shortNameHash == -1806479147) {
-				weapon.GetComponentInChildren<MeshCollider> ().enabled = false;
-				gameObject.GetComponent<Player> ().damage = 0;
+				weapon.GetComponentInChildren<MeshCollider> ().gameObject.SetActive(false);//enabled = false;
 			} else {
-				weapon.GetComponentInChildren<MeshCollider> ().enabled = true;
+				weapon.GetComponentInChildren<MeshCollider> ().gameObject.SetActive(true);//enabled = true;
 			}
 
 			bool attackState = animator.GetCurrentAnimatorStateInfo (0).IsName ("attacks");
