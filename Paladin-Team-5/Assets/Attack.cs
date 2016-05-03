@@ -2,8 +2,6 @@
 
 public class Attack : MonoBehaviour
 {
-	public static float enemy_Damage_Multiplier = 1.0f;
-
 	public enum attack_Type
 	{
 		regular,
@@ -29,7 +27,7 @@ public class Attack : MonoBehaviour
 		}
 		else if(this.owner.tag == "Enemy")
 		{
-			this.damage = this.owner.GetComponentInChildren<Enemy>().damage * Attack.enemy_Damage_Multiplier;
+			this.damage = this.owner.GetComponentInChildren<Enemy>().damage;
 		}
 	}
 
