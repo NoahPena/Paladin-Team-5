@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
 	public float maximum_Mana;
 	public float current_Mana;
 	public float mana_Regeneration;
+	public RectTransform current_Health_Bar;
+	public RectTransform current_Stamina_Bar;
+	public RectTransform current_Mana_Bar;
 
 	public bool blocked = false;
 
@@ -79,7 +82,10 @@ public class Player : MonoBehaviour
 
 		//Regeneration Statistics
 		this.current_Health = Mathf.Min(this.maximum_Health, this.current_Health + this.health_Regeneration * Time.fixedDeltaTime);
+		this.current_Health_Bar.localScale = new Vector3(this.current_Health / this.maximum_Health, 1.0f, 1.0f);
 		this.current_Stamina = Mathf.Min(this.maximum_Stamina, this.current_Stamina + this.stamina_Regeneration * Time.fixedDeltaTime);
+		this.current_Stamina_Bar.localScale = new Vector3(this.current_Stamina / this.maximum_Stamina, 1.0f, 1.0f);
 		this.current_Mana = Mathf.Min(this.maximum_Mana, this.current_Mana + this.mana_Regeneration * Time.fixedDeltaTime);
+		this.current_Mana_Bar.localScale = new Vector3(this.current_Mana / this.maximum_Mana, 1.0f, 1.0f);
 	}
 }
