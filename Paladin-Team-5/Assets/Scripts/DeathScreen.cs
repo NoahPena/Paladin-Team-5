@@ -17,6 +17,11 @@ public class DeathScreen : Interface_Window {
 		//Time.timeScale = 0.0f;
 	}
 
+	public void enter_god_mode()
+	{
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
 	public void restart_game()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
