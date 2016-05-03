@@ -19,7 +19,7 @@ public class DeathScreen : Interface_Window {
 
 	public void enter_god_mode()
 	{
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+		base.toggle_Interface ();
 	}
 
 	public void restart_game()
