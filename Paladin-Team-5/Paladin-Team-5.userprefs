@@ -1,21 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\overlord\scripts\OverlordControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DeathScreen.cs">
     <Files>
-      <File FileName="Assets\Attack.cs" Line="30" Column="4" />
-      <File FileName="Assets\Scripts\Player.cs" Line="18" Column="30" />
-      <File FileName="Assets\Scripts\Inventory.cs" Line="1" Column="1" />
-      <File FileName="Assets\overlord\scripts\OverlordControl.cs" Line="219" Column="7" />
-      <File FileName="Assets\Scripts\Weapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Activatable\PickupItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Activatable\Chest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Interface_Window.cs" Line="1" Column="1" />
+      <File FileName="Assets\overlord\scripts\OverlordControl.cs" Line="66" Column="51" />
+      <File FileName="Assets\Scripts\Interface_Window.cs" Line="72" Column="45" />
       <File FileName="Assets\Scripts\Item.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Equipment.cs" Line="1" Column="1" />
       <File FileName="Assets\overlord\scripts\Sword.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Activatable\Lever.cs" Line="1" Column="1" />
-      <File FileName="Assets\Attack_Trigger.cs" Line="22" Column="8" />
-      <File FileName="Assets\Enemy.cs" Line="51" Column="51" />
+      <File FileName="Assets\Attack_Trigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Main_Menu_Actions.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DeathScreen.cs" Line="27" Column="23" />
+      <File FileName="Assets\Scripts\Options_Menu.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\Player.cs" Line="87" Column="2" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

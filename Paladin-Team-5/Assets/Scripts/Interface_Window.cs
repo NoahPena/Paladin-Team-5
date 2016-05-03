@@ -65,6 +65,13 @@ public abstract class Interface_Window : MonoBehaviour
 			Interface_Window.window_To_Drag = this.transform.parent.gameObject;
 			this.interface_Canvas.transform.SetAsFirstSibling();
 		}
+		if (!this.interface_Canvas.gameObject.activeSelf) {
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		} else {
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
 		this.interface_Canvas.gameObject.SetActive(!this.interface_Canvas.gameObject.activeSelf);
 	}
 }

@@ -48,6 +48,7 @@
      <Compile Include="Assets\Agression_Trigger.cs" />
      <Compile Include="Assets\Attack.cs" />
      <Compile Include="Assets\Attack_Trigger.cs" />
+     <Compile Include="Assets\Audio_Manager.cs" />
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\Scripts\Activatable\Activatable.cs" />
      <Compile Include="Assets\Scripts\Activatable\Chest.cs" />
@@ -55,6 +56,7 @@
      <Compile Include="Assets\Scripts\Activatable\Lever.cs" />
      <Compile Include="Assets\Scripts\Activatable\PickupItem.cs" />
      <Compile Include="Assets\Scripts\Camera_Controller.cs" />
+     <Compile Include="Assets\Scripts\DeathScreen.cs" />
      <Compile Include="Assets\Scripts\Equipment.cs" />
      <Compile Include="Assets\Scripts\Interface_Window.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
@@ -70,10 +72,15 @@
      <None Include="Assets\ghoul\shader\ghoulshader.shader" />
      <None Include="Assets\overlord\models\overlord\Materials\clothshader.shader" />
      <None Include="Assets\Elven_Sword\ReadMe.txt" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\overlord\readme.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

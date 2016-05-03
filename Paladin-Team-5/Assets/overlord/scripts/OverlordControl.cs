@@ -55,10 +55,15 @@ public class OverlordControl : MonoBehaviour
 	public Transform myCamera;
 	private Transform reference;
 
+	public bool hasDied = false;
+
+	private DeathScreen deathScreen;
+
 	// Use this for initialization
 	void Start () 
 	{
 		reference = new GameObject ().transform;
+		deathScreen = this.GetComponent<DeathScreen> ();
 	}
 	
 	// Update is called once per frame
@@ -81,6 +86,13 @@ public class OverlordControl : MonoBehaviour
 		Vector3 horizontalVelocity = new Vector3 (x, 0, z);
 		float horizontalSpeed = horizontalVelocity.magnitude;
 		Vector3 localMagnitude = transform.InverseTransformDirection (horizontalVelocity);
+
+		if (GetComponent<Player> ().current_Health <= 0 && hasDied == false) 
+		{
+			animator.Play ("Death");
+			hasDied = true;
+			deathScreen.toggle_Interface ();
+		}
 
 		if (fightModus) 
 		{

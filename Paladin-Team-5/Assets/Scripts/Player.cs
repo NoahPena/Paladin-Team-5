@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
 		this.inventory = this.GetComponent<Inventory>();
 		this.equipment = this.GetComponent<Equipment>();
 		this.menu = this.GetComponent<Options_Menu>();
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	void Update()
@@ -81,5 +84,6 @@ public class Player : MonoBehaviour
 		this.current_Health = Mathf.Min(this.maximum_Health, this.current_Health + this.health_Regeneration * Time.fixedDeltaTime);
 		this.current_Stamina = Mathf.Min(this.maximum_Stamina, this.current_Stamina + this.stamina_Regeneration * Time.fixedDeltaTime);
 		this.current_Mana = Mathf.Min(this.maximum_Mana, this.current_Mana + this.mana_Regeneration * Time.fixedDeltaTime);
+	
 	}
 }
